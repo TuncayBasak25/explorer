@@ -2,9 +2,10 @@
   "name": "explorer",
   "version": "1.0.0",
   "description": "A simple package to simplify node fs.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "push": "npm run clean & tsc -p . & git add . & git commit -m \"Save\" & git push",
+    "clean": "node -e \"require('fs').rmSync('./dist', { recursive: true, force: true })\""
   },
   "repository": {
     "type": "git",
