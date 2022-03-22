@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "push": "npm run clean & tsc -p . & git add . & git commit -m \"Save\" & git push",
-    "clean": "rm -rf dist"
+    "clean": "node -e \"require('fs').rmSync('./dist', { recursive: true, force: true })\""
   },
   "repository": {
     "type": "git",
