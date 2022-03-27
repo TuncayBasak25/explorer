@@ -26,6 +26,9 @@ export class File {
         if (this.extension === '.js') {
             return require(this.path.slice(0, -3)).default;
         }
+        if (this.extension === '.json') {
+            return JSON.parse(this.content);
+        }
     }
 
     public get folder(): Folder {
