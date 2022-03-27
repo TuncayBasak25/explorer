@@ -3,22 +3,11 @@ import path from "path";
 import { Folder } from "../folder.class";
 
 export class File {
-    public static readonly instances: { [key: string]: File } = {};
-
     private $content: string = "";
 
     public constructor(public readonly path: string) {
         if (!fs.existsSync(path)) {
             fs.appendFileSync(path, "");
-        }
-        if (!fs.lstatSync(path).isFile()) {
-            throw new Error("The path specified has to be a file.");
-        }
-        if (File.instances[path]) {
-            return File.instances[path];
-        }
-        else {
-            File.instances[path] = this;
         }
     }
 
@@ -29,6 +18,10 @@ export class File {
         if (this.extension === '.json') {
             return JSON.parse(this.content);
         }
+    }
+
+    public delete(): void {
+        fs.rmSync(this.path);
     }
 
     public get folder(): Folder {
