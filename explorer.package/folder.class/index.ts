@@ -22,6 +22,9 @@ export class Folder extends Mixin(Finder) {
         }
     }
 
+    public createFile(name: string): File {
+        return new File(this.pathJoin(name));
+    }
 
     public get name(): string {
         return path.basename(this.path);
