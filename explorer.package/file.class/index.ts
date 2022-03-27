@@ -41,6 +41,11 @@ export class File {
         return this.$content;
     }
 
+    public set content(newContent: string) {
+        this.$content = newContent;
+        fs.writeFileSync(this.path, newContent);
+    }
+
     public get name(): string {
         return this.basename.slice(0, -this.extension.length);
     }
