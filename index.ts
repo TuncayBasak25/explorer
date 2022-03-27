@@ -1,7 +1,5 @@
-import File from "./core/file";
-import Folder from "./core/folder";
+import * as explorer from "./explorer.package";
 
-export {
-    File,
-    Folder
-}
+export default explorer;
+
+export * from "./explorer.package";

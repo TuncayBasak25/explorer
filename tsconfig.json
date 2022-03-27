@@ -15,6 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
   },
   "exclude": ["node_modules", "dist"]
 }
