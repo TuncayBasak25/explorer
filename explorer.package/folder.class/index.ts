@@ -11,6 +11,9 @@ export class Folder extends Mixin(Finder) {
 
     public constructor(public readonly path: string) {
         super();
+        if (!fs.existsSync(path)) {
+            fs.mkdirSync(path);
+        }
         if (!fs.lstatSync(path).isDirectory()) {
             throw new Error("The path specified must be a folder.");
         }
@@ -24,6 +27,10 @@ export class Folder extends Mixin(Finder) {
 
     public createFile(name: string): File {
         return new File(this.pathJoin(name));
+    }
+
+    public createFolder(name: string): Folder {
+        return new Folder(this.pathJoin(name));
     }
 
     public get name(): string {
