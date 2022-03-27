@@ -8,6 +8,9 @@ export class File {
     private $content: string = "";
 
     public constructor(public readonly path: string) {
+        if (!fs.existsSync(path)) {
+            fs.appendFileSync(path, "");
+        }
         if (!fs.lstatSync(path).isFile()) {
             throw new Error("The path specified has to be a file.");
         }
