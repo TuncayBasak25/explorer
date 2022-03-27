@@ -7,21 +7,11 @@ import Finder from "./finder.mixin";
 
 
 export class Folder extends Mixin(Finder) {
-    public static readonly instances: { [key: string]: Folder } = {};
 
     public constructor(public readonly path: string) {
         super();
         if (!fs.existsSync(path)) {
             fs.mkdirSync(path);
-        }
-        if (!fs.lstatSync(path).isDirectory()) {
-            throw new Error("The path specified must be a folder.");
-        }
-        if (Folder.instances[path]) {
-            return Folder.instances[path];
-        }
-        else {
-            Folder.instances[path] = this;
         }
     }
 
@@ -31,6 +21,10 @@ export class Folder extends Mixin(Finder) {
 
     public createFolder(name: string): Folder {
         return new Folder(this.pathJoin(name));
+    }
+
+    public delete(): void {
+        fs.rmSync(this.path, { recursive: true, force: true });
     }
 
     public get name(): string {
