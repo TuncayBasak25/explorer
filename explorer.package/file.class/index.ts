@@ -1,11 +1,14 @@
 import fs from "fs";
 import path from "path";
+import { Mixin } from "ts-mixer";
 import { Folder } from "../folder.class";
+import Watcher from "../watcher.mixin";
 
-export class File {
+export class File extends Mixin(Watcher) {
     private $content: string = "";
 
     public constructor(public readonly path: string) {
+        super();
         if (!fs.existsSync(path)) {
             fs.appendFileSync(path, "");
         }

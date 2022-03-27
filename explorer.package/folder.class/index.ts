@@ -4,9 +4,10 @@ import { File } from '../';
 
 import { Mixin } from "ts-mixer"
 import Finder from "./finder.mixin";
+import Watcher from "../watcher.mixin";
 
 
-export class Folder extends Mixin(Finder) {
+export class Folder extends Mixin(Finder, Watcher) {
 
     public constructor(public readonly path: string) {
         super();
