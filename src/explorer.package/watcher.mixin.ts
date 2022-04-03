@@ -1,6 +1,6 @@
 import { FSWatcher, watch } from "fs";
 
-type Listener = (subject: any) => void;
+type Listener = (args: { subject: any, filename: string }) => void;
 
 export default abstract class Watcher {
     public abstract readonly path: string;
@@ -35,7 +35,7 @@ export default abstract class Watcher {
                 flag = false;
                 setTimeout(() => {
                     for (let listener of this.listenerList) {
-                        listener(this);
+                        listener({ subject: this, filename: filename});
                     }
                     flag = true;
                 }, 30);

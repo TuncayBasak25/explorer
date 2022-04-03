@@ -1,4 +1,7 @@
-declare type Listener = (subject: any) => void;
+declare type Listener = (args: {
+    subject: any;
+    filename: string;
+}) => void;
 export default abstract class Watcher {
     abstract readonly path: string;
     private listenerList;
