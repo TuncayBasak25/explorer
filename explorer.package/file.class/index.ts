@@ -21,6 +21,8 @@ export class File extends Mixin(Watcher) {
         if (this.extension === '.json') {
             return JSON.parse(this.content);
         }
+
+        throw new Error("This file cannot be required!");
     }
 
     public delete(): void {

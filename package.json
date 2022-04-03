@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "A simple package to simplify node fs.",
   "main": "dist/index.js",
-  "scripts": {
-    "push": "npm run compile & git add . & git commit -m \"Save\" & git push",
-    "compile": "npm run clean & tsc -p .",
-    "clean": "node -e \"require('fs').rmSync('./dist', { recursive: true, force: true })\""
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TuncayBasak25/explorer.git"

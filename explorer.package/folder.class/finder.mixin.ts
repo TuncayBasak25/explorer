@@ -9,6 +9,22 @@ enum Types {
 
 type Content = Folder | File;
 
+type ContentOptions = {
+    name?: StringOptions,
+}
+
+type FolderOptions = ContentOptions & {
+    fileList?: FileOptions,
+    folderList?: FolderOptions,
+    contentList?: ContentOptions
+}
+
+type FileOptions = ContentOptions & {
+    extension?: StringOptions,
+    basename?: StringOptions,
+    content?: StringOptions
+}
+
 export default abstract class Finder {
     public abstract contentList: Content[];
     public abstract folderList: Folder[];
@@ -102,20 +118,4 @@ export default abstract class Finder {
     public findAllFile(query: Query<FileOptions> = {}, recursive?: boolean, recursiveDepth?: number): File[] {
         return this.findMultiple<File>(Types.File, query, recursive, recursiveDepth);
     }
-}
-
-type ContentOptions = {
-    name?: StringOptions,
-}
-
-type FolderOptions = ContentOptions & {
-    fileList?: FileOptions,
-    folderList?: FolderOptions,
-    contentList?: ContentOptions
-}
-
-type FileOptions = ContentOptions & {
-    extension?: StringOptions,
-    basename?: StringOptions,
-    content?: StringOptions
 }

@@ -84,23 +84,13 @@ export class Folder extends Mixin(Finder, Watcher) {
         return fileList;
     }
     
-    // public getFolder(folderName: string): Folder | null {
-    //     const index = this.folderNameList.indexOf(folderName);
-    //     if (index !== -1) {
-    //         return new Folder(this.pathJoin(folderName));
-    //     }
-        
-    //     return null;
-    // }
+    public require(): any {
+        if (this.fileNameList.includes("index.js")) {
+            return new File(this.pathJoin("index.js")).require();
+        }
 
-    // public getFile(fileName: string): File | null {
-    //     const index = this.fileNameList.indexOf(fileName);
-    //     if (index !== -1) {
-    //         return new File(this.pathJoin(fileName));
-    //     }
-    
-    //     return null;
-    // }
+        throw new Error("This folder cannot be required!");
+    }
     
     public pathJoin(name: string): string {
         return path.join(this.path, name);
