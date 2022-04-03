@@ -27,7 +27,7 @@ class Watcher {
                 flag = false;
                 setTimeout(() => {
                     for (let listener of this.listenerList) {
-                        listener(eventType, filename);
+                        listener(this);
                     }
                     flag = true;
                 }, 30);
