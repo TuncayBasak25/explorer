@@ -83,6 +83,30 @@ export class Folder extends Mixin(Finder, Watcher) {
 
         return fileList;
     }
+
+    public get contents(): {[key: string]: File | Folder} {
+        return {...this.folders, ...this.files};
+    }
+
+    public get folders(): {[key: string]: Folder} {
+        const folders: {[key: string]: Folder} = {};
+
+        for (let folderName of this.folderNameList) {
+            folders[folderName] = new Folder(this.pathJoin(folderName));
+        }
+
+        return folders;
+    }
+
+    public get files(): {[key: string]: File} {
+        const files: {[key: string]: File} = {};
+
+        for (let fileName of this.fileNameList) {
+            files[fileName] = new File(this.pathJoin(fileName));
+        }
+
+        return files;
+    }
     
     public require(): any {
         if (this.fileNameList.includes("index.js")) {

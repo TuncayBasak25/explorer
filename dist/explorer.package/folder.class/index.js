@@ -69,6 +69,23 @@ class Folder extends (0, ts_mixer_1.Mixin)(finder_mixin_1.default, watcher_mixin
         ;
         return fileList;
     }
+    get contents() {
+        return Object.assign(Object.assign({}, this.folders), this.files);
+    }
+    get folders() {
+        const folders = {};
+        for (let folderName of this.folderNameList) {
+            folders[folderName] = new Folder(this.pathJoin(folderName));
+        }
+        return folders;
+    }
+    get files() {
+        const files = {};
+        for (let fileName of this.fileNameList) {
+            files[fileName] = new __1.File(this.pathJoin(fileName));
+        }
+        return files;
+    }
     require() {
         if (this.fileNameList.includes("index.js")) {
             return new __1.File(this.pathJoin("index.js")).require();

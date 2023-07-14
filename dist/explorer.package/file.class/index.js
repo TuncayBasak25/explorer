@@ -13,8 +13,6 @@ class File extends (0, ts_mixer_1.Mixin)(watcher_mixin_1.default) {
     constructor(path) {
         super();
         this.path = path;
-        this.$content = "";
-        this.updateContent = true;
         if (!fs_1.default.existsSync(path)) {
             fs_1.default.appendFileSync(path, "");
         }
@@ -35,14 +33,9 @@ class File extends (0, ts_mixer_1.Mixin)(watcher_mixin_1.default) {
         return new folder_class_1.Folder(this.path.slice(0, this.basename.length + 1));
     }
     get content() {
-        if (this.updateContent) {
-            this.$content = fs_1.default.readFileSync(this.path, 'utf8');
-            this.updateContent = false;
-        }
-        return this.$content;
+        return fs_1.default.readFileSync(this.path, 'utf8');
     }
     set content(newContent) {
-        this.$content = newContent;
         fs_1.default.writeFileSync(this.path, newContent);
     }
     get name() {

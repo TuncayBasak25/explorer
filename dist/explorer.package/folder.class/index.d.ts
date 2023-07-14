@@ -15,6 +15,15 @@ export declare class Folder extends Folder_base {
     get contentList(): (Folder | File)[];
     get folderList(): Folder[];
     get fileList(): File[];
+    get contents(): {
+        [key: string]: File | Folder;
+    };
+    get folders(): {
+        [key: string]: Folder;
+    };
+    get files(): {
+        [key: string]: File;
+    };
     require(): any;
     pathJoin(name: string): string;
 }

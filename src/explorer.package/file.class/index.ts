@@ -5,7 +5,6 @@ import { Folder } from "../folder.class";
 import Watcher from "../watcher.mixin";
 
 export class File extends Mixin(Watcher) {
-    private $content: string = "";
 
     public constructor(public readonly path: string) {
         super();
@@ -33,17 +32,11 @@ export class File extends Mixin(Watcher) {
         return new Folder(this.path.slice(0, this.basename.length + 1));
     }
 
-    private updateContent: boolean = true;
     public get content(): string {
-        if (this.updateContent) {
-            this.$content = fs.readFileSync(this.path, 'utf8');
-            this.updateContent = false;
-        }
-        return this.$content;
+        return fs.readFileSync(this.path, 'utf8');
     }
 
     public set content(newContent: string) {
-        this.$content = newContent;
         fs.writeFileSync(this.path, newContent);
     }
 
